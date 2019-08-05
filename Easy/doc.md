@@ -26,3 +26,29 @@ int sum = i->first + j->first;
 result.push_back(i->second);
 ```
 
+
+
+## 7_reverse
+
+stringstream的用法
+
+```c++
+// 头文件
+#include <sstream>
+
+// int转string
+stringstream s;
+string str;
+s << x;
+s >> str;
+string result_str;
+
+// 清空
+s.clear();
+
+// string转long
+long result_num;
+s << result_str;
+s >> result_num;
+```
+
