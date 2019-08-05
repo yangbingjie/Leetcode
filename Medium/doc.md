@@ -22,3 +22,35 @@ ListNode* buildTree(vector<int>vec){
 }
 ```
 
+
+
+## 11_maxArea
+
+[剪枝正确性证明](https://leetcode-cn.com/problems/container-with-most-water/solution/zhi-guan-de-shuang-zhi-zhen-fa-jie-shi-by-na-kong/)
+
+```c++
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int max_area = 0;
+        int temp_area = 0;
+        int start = 0;
+        int end = int(height.size() - 1);
+        
+        while (start < end) {
+            temp_area = (end - start) * min(height[start], height[end]);
+            if (temp_area > max_area) {
+                max_area = temp_area;
+            }
+            if (height[start] < height[end]) {
+                start++;
+            }else{
+                end--;
+            }
+        }
+        
+        return max_area;
+    }
+};
+```
+
