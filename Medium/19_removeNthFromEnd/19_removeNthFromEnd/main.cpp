@@ -18,29 +18,54 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
+// Fast pointer and slow pointer
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode* p = head;
-        vector<ListNode*> pointers;
-        while (p != NULL) {
-            pointers.push_back(p);
-            p = p -> next;
+        ListNode* fast = head;
+        ListNode* slow = head;
+        while (n > 0) {
+            fast = fast -> next;
+            n--;
         }
-        int target = int(pointers.size() - n);
-        if (target == 0) {
-            if (pointers.size() > 1) {
-                head = pointers[target + 1];
-            }else{
-                head = NULL;
-            }            
-        }else{
-            pointers[target - 1] -> next = pointers[target] -> next;
+        if (fast == NULL) {
+            return head -> next;
         }
-        delete pointers[target];
+        while (fast -> next != NULL) {
+            fast = fast -> next;
+            slow = slow -> next;
+        }
+
+        ListNode* temp = slow->next;
+        slow->next = temp->next;
+        delete temp;
         return head;
     }
 };
+
+//class Solution {
+//public:
+//    ListNode* removeNthFromEnd(ListNode* head, int n) {
+//        ListNode* p = head;
+//        vector<ListNode*> pointers;
+//        while (p != NULL) {
+//            pointers.push_back(p);
+//            p = p -> next;
+//        }
+//        int target = int(pointers.size() - n);
+//        if (target == 0) {
+//            if (pointers.size() > 1) {
+//                head = pointers[target + 1];
+//            }else{
+//                head = NULL;
+//            }
+//        }else{
+//            pointers[target - 1] -> next = pointers[target] -> next;
+//        }
+//        delete pointers[target];
+//        return head;
+//    }
+//};
 
 ListNode* create_list(vector<int>vec){
     ListNode* head = new ListNode(vec[0]);
@@ -55,7 +80,7 @@ ListNode* create_list(vector<int>vec){
 
 int main() {
     Solution s;
-    const int LEN = 1;
+    const int LEN = 5;
     int array[LEN] = {1};
     vector<int> vec(array, array + LEN);
     ListNode* head = create_list(vec);
