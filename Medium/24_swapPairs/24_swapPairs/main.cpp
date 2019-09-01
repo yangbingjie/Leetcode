@@ -38,12 +38,9 @@ public:
         if (left && right) {
             if (right -> next && right->next->next) {
                 left -> next = recursionSwap(right->next, right->next->next);
-            }else if (right ->next){
-                left -> next = right->next;
             }else{
-                left -> next = NULL;
-            }
-            
+                left -> next = right->next;
+            }            
             right -> next = left;
         }
         return right;
