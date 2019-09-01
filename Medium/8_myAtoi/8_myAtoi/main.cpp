@@ -8,14 +8,12 @@
 
 #include <iostream>
 #include <string>
-#include <sstream>
 using namespace std;
 
 class Solution {
 public:
     int myAtoi(string str) {
         int index = 0;
-        string result_str = "";
         
         // Remove the space before the number
         while (index < str.length() && str[index] == ' ') {
@@ -27,51 +25,51 @@ public:
             return 0;
         }
         
+        bool sign = true;
         // Check the sign of the number
         if (str[index] == '-' || str[index] == '+') {
-            result_str += str[index];
+            if (str[index] == '-') {
+                sign = false;
+            }
             index++;
         }
         
-        // If the result is a number
-        bool is_num = false;
-        
+        int result = 0;
         // Check the first char (after the sign) is a number
         if (index != str.length() && str[index] >= 48 && str[index] <= 57) {
-            is_num = true;
-            result_str += str[index];
+            result += str[index] - 48;
             index++;
+        }else{
+            return 0;
         }
-        
+        int offset;
         // Add the char until it is not a number
         for (;index != str.length(); ++index) {
             if (str[index] >= 48 && str[index] <= 57) {
-                result_str += str[index];
+                offset = str[index] - 48;
+                if (result < 214748365) {
+                    result *= 10;
+                }else{
+                    return sign ? 2147483647 : -2147483648;
+                }
+                if (!sign && result >= (2147483648 - offset)) {
+                    return -2147483648;
+                }
+                if (sign && result  > (2147483647 - offset)) {
+                    return 2147483647;
+                }
+                result += offset;
             }else{
                 break;
             }
         }
-        
-        // From string to long
-        long result_num;
-        stringstream s;
-        s << result_str;
-        s >> result_num;
-        
-        // Check for overflow
-        if (result_num < -2147483648) {
-            result_num = -2147483648;
-        }
-        if (result_num  > 2147483647) {
-            result_num = 2147483647;
-        }
-        return int(result_num);
+        return sign ? result : -result;
     }
 };
 
 int main(int argc, const char * argv[]) {
     // insert code here...
     Solution s;
-    cout << s.myAtoi("2147483648") << endl;
+    cout << s.myAtoi("-91283472332") << endl;
     return 0;
 }
