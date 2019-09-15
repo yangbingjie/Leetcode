@@ -30,6 +30,7 @@ ListNode* create_list(vector<int>vec){
     return head;
 }
 
+
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
@@ -38,15 +39,26 @@ public:
         }
         ListNode* p1 = head;
         ListNode* p2 = head->next;
+        ListNode* tmp;
+        bool hasSame = false;
         while (p2 != NULL) {
             if(p1 -> val == p2->val){
-                p1->next = p2->next;
+                hasSame = true;
+                tmp = p2->next;
                 delete p2;
-                p2 = p1->next;
+                p2 = tmp;
             }else{
+                if (hasSame) {
+                    p1->next = p2;
+                    hasSame = false;
+                }
                 p1 = p1->next;
                 p2 = p2->next;
             }
+        }
+        if (hasSame) {
+            p1->next = NULL;
+            delete p2;
         }
         return head;
     }
@@ -54,8 +66,8 @@ public:
 
 int main(int argc, const char * argv[]) {
     Solution s;
-    const int LEN = 5;
-    int array[LEN] = {1,1,2,3,3};
+    const int LEN = 2;
+    int array[LEN] = {1,2};
     vector<int>vec(array, array+LEN);
     ListNode* head = create_list(vec);
     s.deleteDuplicates(head);
