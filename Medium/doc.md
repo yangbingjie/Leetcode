@@ -74,6 +74,15 @@ public:
 
 
 
+## 62_uniquePaths
+
+```c++
+// m*n的二维vector
+vector<vector<int>> nums(m, vector<int>(n));
+```
+
+
+
 ## 73_setZeroes
 
 NaN ：阶码的每个二进制位全为1  并且  尾数不为0；
