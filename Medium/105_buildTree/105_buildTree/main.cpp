@@ -38,18 +38,14 @@ private:
     }
 public:
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        if (preorder.empty()) {
-            return NULL;
-        }
-        TreeNode*root = recurBuildTree(preorder, 0, int(preorder.size()), inorder, 0, int(inorder.size()));
-        return root;
+        return recurBuildTree(preorder, 0, int(preorder.size()), inorder, 0, int(inorder.size()));;
     }
 };
 int main(int argc, const char * argv[]) {
     Solution s;
-    const int LEN = 1;
-    int array1[LEN] = {1};
-    int array2[LEN] = {1};
+    const int LEN = 0;
+    int array1[LEN] = {};
+    int array2[LEN] = {};
 
 //    int array1[LEN] = {3,9,1,20,15,7};
 //    int array2[LEN] = {1,9,3,15,20,7};
