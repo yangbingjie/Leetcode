@@ -15,35 +15,25 @@ public:
         if (prices.empty()) {
             return 0;
         }
-        int profit = 0;
-        int i = 0;
-        int j = int(prices.size() - 1);
-        while (i + 1 < prices.size() && prices[i] >= prices[i + 1]) {
-            i++;
+        vector<int> profit(prices.size());
+        profit[0] = prices[0];
+        for (int i = 1; i < prices.size(); ++i) {
+            profit[i] = min(profit[i - 1], prices[i]);
         }
-        if (i + 1 == prices.size()) {
-            return 0;
+        int end_index = int(prices.size() - 1);
+        profit[end_index] = prices[end_index] - profit[end_index];
+        for (int i = end_index - 1; i >= 0; --i) {
+            profit[i] = max(profit[i + 1], prices[i]) - profit[i];
         }
-        while (j - 1 >= 0 && prices[j - 1] >= prices[j]) {
-            j--;
-        }
-        int tmp;
-        for (int a = i; a < j; ++a) {
-            for (int b = a + 1; b <= j; ++b) {
-                tmp = prices[b] - prices[a];
-                if (tmp > profit) {
-                    profit = tmp;
-                }
-            }
-        }
-        return profit;
+
+        return *max_element(profit.begin(), profit.end());
     }
 };
 
 int main(int argc, const char * argv[]) {
     Solution s;
-    const int LEN = 5;
-    int array[LEN] = {2,1,2,0,1};
+    const int LEN = 2;
+    int array[LEN] = {1,2};
     vector<int>prices(array, array + LEN);
     cout << s.maxProfit(prices) << endl;
     return 0;
