@@ -14,8 +14,17 @@ using namespace std;
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        return nums[nums.size() / 2];
+        int vote = 0;
+        int result = 0;
+        for (int i = 0; i < nums.size(); ++i) {
+            if (vote == 0) {
+                vote++;
+                result = nums[i];
+            }else{
+                vote += (result == nums[i]) ? 1 : -1;
+            }
+        }
+        return result;
     }
 };
 
