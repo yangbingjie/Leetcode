@@ -16,6 +16,19 @@ struct ListNode {
      ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
  };
+ListNode* create_list(vector<int>vec){
+    if (vec.size() == 0) {
+        return NULL;
+    }
+    ListNode* head = new ListNode(vec[0]);
+    ListNode* end = head;
+    for (int i = 1; i < vec.size(); ++i) {
+        ListNode* temp = new ListNode(vec[i]);
+        end->next = temp;
+        end = temp;
+    }
+    return head;
+}
 
 class Solution {
 public:
@@ -59,21 +72,6 @@ public:
         return head;
     }
 };
-
-
-ListNode* create_list(vector<int>vec){
-    if (vec.size() == 0) {
-        return NULL;
-    }
-    ListNode* head = new ListNode(vec[0]);
-    ListNode* end = head;
-    for (int i = 1; i < vec.size(); ++i) {
-        ListNode* temp = new ListNode(vec[i]);
-        end->next = temp;
-        end = temp;
-    }
-    return head;
-}
 
 
 int main(int argc, const char * argv[]) {
