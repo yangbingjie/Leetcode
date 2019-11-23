@@ -180,3 +180,28 @@ vector<int> buildNextVector(string needle){
 ### Boyer-Moore算法
 
 http://igm.univ-mlv.fr/~lecroq/string/node14.html
+
+##  290_wordPattern
+
+Find something in map by value
+
+```c++
+class finder
+{
+public:
+    finder(const string &cmp_string) :s_(cmp_string){}
+    bool operator ()(const map<int, string>::value_type &item)
+    {
+        return item.second == s_;
+    }
+private:
+    const string &s_;
+};
+
+map<char, string> m;
+string current = "2";
+map<char, string>::iterator iter_2;
+m['b'] = "2";
+iter_2 = find_if(m.begin(), m.end(), finder(current));
+```
+
