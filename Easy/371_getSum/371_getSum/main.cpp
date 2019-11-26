@@ -11,11 +11,30 @@ using namespace std;
 class Solution {
 public:
     int getSum(int a, int b) {
-        
+        bool sign = true;
+        if (a < 0 && b < 0) {
+            sign = false;
+        }
+        int result = 0;
+        int p = 0;
+        int carry = 0;
+        int pos = 1;
+        while(true){
+            p = (a & pos) ^ (b & pos) ^ carry;
+            result |= p & pos;
+            carry =  ((a & b) | (a & carry) | (carry & b)) & pos;
+            if (pos > 0) {
+                pos = pos << 1;
+                carry = carry << 1;
+            }else{
+                break;
+            }
+        }
+        return result;
     }
 };
 int main(int argc, const char * argv[]) {
     Solution s;
-    cout << s.getSum(-2, 3);
+    cout << s.getSum(1, -9);
     return 0;
 }
