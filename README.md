@@ -1,2 +1,2 @@
 # Leetcode
-Leetcode Problems of Easy &amp; Medium Difficulty
+Leetcode Problems of My Solution
