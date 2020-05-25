@@ -214,9 +214,21 @@ public:
 };
 ```
 
+## 146_LRUCache
 
+linked hash map
+
+- 在双向链表( std::list )中存放实际的KV对；
+- 在哈希表( std::unordered_map )中存放Key到双向链表中的相应位置迭代器的映射。
+
+在插入和遍历时，可以利用利用双向链表的灵活性，进行随机地插入元素，同时因其迭代器永不失效，所以可以作为哈希表中的value；查找时可以利用哈希表的特性，基于关键字key做平均常数时间复杂度的快速查找。
+
+![在这里插入图片描述](assets/doc/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hmMTk5MzExMDE=,size_16,color_FFFFFF,t_70.png)
 
 ## Reference
 
-[STL bitset用法总结](http://www.cppblog.com/ylfeng/archive/2010/03/26/110592.aspx)
+- [STL bitset用法总结](http://www.cppblog.com/ylfeng/archive/2010/03/26/110592.aspx)
+- [自定义C++容器之LinkedHashMap](https://blog.csdn.net/hf19931101/java/article/details/81979253)
+
+
 

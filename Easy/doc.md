@@ -205,3 +205,25 @@ m['b'] = "2";
 iter_2 = find_if(m.begin(), m.end(), finder(current));
 ```
 
+
+
+## 697_findShortestSubArray
+
+map sort by value
+
+```
+template <typename T1, typename T2>
+struct great_second {
+    typedef pair<T1, T2> type;
+    bool operator ()(type const& a, type const& b) const {
+        return a.second > b.second;
+    }
+};
+int main(int argc, const char * argv[]) {
+   map<int, int>m;        
+   vector<pair<int, int> >mapcopy(m.begin(), m.end());
+   sort(mapcopy.begin(), mapcopy.end(), great_second<int, int>());
+   return 0;
+}
+```
+
