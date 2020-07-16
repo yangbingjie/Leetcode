@@ -729,6 +729,10 @@ $$
 
 ![截屏2020-07-11 20.22.38](assets/doc/截屏2020-07-11 20.49.11.png)
 
+# 785_isBipartite
+
+状态存储：广度优先是用队列，深度优先是用栈
+
 # Reference
 
 - [STL bitset用法总结](http://www.cppblog.com/ylfeng/archive/2010/03/26/110592.aspx)
