@@ -733,6 +733,31 @@ $$
 
 状态存储：广度优先是用队列，深度优先是用栈
 
+# 456_find132pattern
+
+单调栈是在栈的先进后出 基础之上额外添加一个特性：从栈顶到栈底的元素是严格递增（or递减）
+
+具体进栈过程如下：
+
+> 对于单调递增栈（or递减），若当前进栈元素为 `e`，从栈顶开始遍历元素，把小于（or大于） `e` 或者等于 `e` 的元素弹出栈，直接遇到一个大于（or小于） `e` 的元素或者栈为空为止，然后再把 `e` 压入栈中
+
+### 应用场景
+
+- 可以在O(N)的时间复杂度，找出每个数**左右两边第一个大于或小于它的解**
+- 单调递增栈用于查找两边第一个小于当前元素的值，单调递减栈用于查找两边第一个大于当前元素的值
+- 一般数组中的单调性问题，题目中隐含第一个或离此元素最近的大于或小于元素的值，这类问题都可以考虑下，用单调栈是否可以求解
+
+```c++
+stack<int> stk;
+for (int i = 0; i < A.size(); i++) {
+    while (stk.size() && A[i] <= A[stk.top()]) { // 单调递增栈（
+        // 单调递减栈A[i] >= A[stk.top()]
+        stk.pop();
+    }
+    stk.push(i);
+}
+```
+
 # Reference
 
 - [STL bitset用法总结](http://www.cppblog.com/ylfeng/archive/2010/03/26/110592.aspx)
@@ -740,4 +765,5 @@ $$
 - [最长公共子序列和最长公共子串](https://zhuanlan.zhihu.com/p/68409952)
 - [树状数组详解](https://www.cnblogs.com/xenny/p/9739600.html)
 - [原码、反码、补码的产生、应用以及优缺点有哪些](https://www.zhihu.com/question/20159860/answer/71256667)
+- [单调栈]([https://muyids.github.io/simple-algorithm/chapter/%E5%8D%95%E8%B0%83%E6%A0%88.html](https://muyids.github.io/simple-algorithm/chapter/单调栈.html))
 
