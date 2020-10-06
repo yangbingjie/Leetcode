@@ -15,28 +15,32 @@ public:
     int commpute_next(string pattern){
         vector<int>next(pattern.size() + 1, 0);
         next[0] = -1;
-        for (int i = 2; i < next.size(); ++i) {
-            for (int j = 1; j < i; ++j) {
-                if (pattern.substr(0, j) == pattern.substr(i - j, j)) {
-                    next[i] = j;
-                }
+        next[1] = 0; // A没有前后缀
+        int i = 2; // i表示next数组的索引
+        int k = 0;
+        while (i < next.size()) {
+            if (pattern[i - 1] == pattern[k]) { // pattern索引比next索引小1
+                next[i] = k + 1;
+                k = next[i];
+                ++i;
+            } else if (k == 0){
+                next[i] = 0;
+                ++i;
+            } else{
+                k = next[k];
             }
         }
-        return next[pattern.size()];
+        return next[next.size() - 1];
     }
 
     string shortestPalindrome(string s) {
         if(s == ""){
             return "";
         }
-        string reverse = "";
-        for (int i = s.size() - 1; i >= 0; --i) {
-            reverse += s[i];
-        }
-        
-        string pattern = s + '#' + reverse;
+        string reverse_str(s.rbegin(), s.rend());
+        string pattern = s + '#' + reverse_str;
         int max_len = commpute_next(pattern);
-        return reverse.substr(0, reverse.size() - max_len) + s;
+        return reverse_str.substr(0, reverse_str.size() - max_len) + s;
     }
 };
 int main(int argc, const char * argv[]) {
