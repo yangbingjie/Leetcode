@@ -15,26 +15,23 @@ public:
             return 0;
         }
         sort(nums.begin(), nums.end());
-        vector<vector<int>> dp(nums.size(), vector<int>(target + 1, 0));
-        vector<int> sum(target + 1, 0);
-        for (int i = 0; i < nums.size() && nums[i] <= target; ++i) {
-            dp[i][nums[i]] = 1;
-            sum[nums[i]] = 1;
+        vector<unsigned int> sum(target, 0);
+        for (int i = 0; i < nums.size() && nums[i] - 1 < target; ++i) {
+            sum[nums[i] - 1] = 1;
         }
-        for (int k = nums[0] + 1; k <= target; ++k) {
-            for (int i = 0, j = k; i < nums.size() && j <= target ; ++i, ++j) {
-                if (dp[i][j] == 0 && j > nums[i]) {
-                    dp[i][j] = sum[j - nums[i]];
-                    sum[j] += dp[i][j];
+        for (int k = nums[0]; k < target; ++k) {
+            for (int i = 0, j = k; i < nums.size() && j < target ; ++i, ++j) {
+                if (j + 1 > nums[i]) {
+                    sum[j] += sum[j - nums[i]];
                 }
             }
         }
-        return sum[target];
+        return sum[target - 1];
     }
 };
 int main(int argc, const char * argv[]) {
-    vector<int>nums = {9};
+    vector<int>nums = {1,2,3,4};
     Solution s;
-    cout << s.combinationSum4(nums, 3) << endl;
+    cout << s.combinationSum4(nums, 4) << endl;
     return 0;
 }
