@@ -2,12 +2,10 @@
 //  main.cpp
 //  925_isLongPressedName
 //
-//  Created by Bella Yang on 2020/1/16.
-//  Copyright © 2020 Bella Yang. All rights reserved.
+//  Created by Bella Yang on 2020/10/21.
 //
 
 #include <iostream>
-#include <string>
 using namespace std;
 class Solution {
 public:
@@ -32,7 +30,7 @@ public:
                     j++;
                     typed_count++;
                 }
-                if (2 * name_count < typed_count || name_count > typed_count) {
+                if (name_count > typed_count) {
                     return false;
                 }
             }else{
@@ -44,6 +42,6 @@ public:
 };
 int main(int argc, const char * argv[]) {
     Solution s;
-    cout << s.isLongPressedName("laiden", "laiden") << endl;
+    cout << s.isLongPressedName("saeed", "ssaaedd") << endl;
     return 0;
 }
